@@ -26,6 +26,7 @@ package jp.co.aforce.util;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -34,6 +35,7 @@ public class DBUtil {
 	private static Connection conn = null;	// コネクション
 	private static Statement stmt = null;	// ステートメント
 	private static ResultSet rs = null;		// リザルトセット
+	private static PreparedStatement preparedStmt = null;  //登録用ステートメント
 
 	// データベース(MySQL)にアクセスする為の基本情報。XAMPPを使った時のデフォルトのまま。
 	private static String sqlDriver = "com.mysql.jdbc.Driver";
@@ -90,6 +92,18 @@ public class DBUtil {
 	}
 	
 	/**
+	 * 登録用のSQLを起動
+	 * @param sql
+	 * @throws Exception
+	 */
+	public static void executeUpdate(String sql)throws Exception{
+		
+	preparedStmt = conn.prepareStatement(sql);
+	preparedStmt.executeUpdate();
+		
+	}
+	
+	/**
 	 * コネクションをクローズする。
 	 * @throws Exception
 	 */
@@ -110,6 +124,9 @@ public class DBUtil {
 				// この処理を忘れると makeConnection() が呼ばれても
 				// コネクションが取得出来なくなるので注意
 				conn = null;
+			}
+			if(preparedStmt !=null) {
+				preparedStmt.close();
 			}
 			
 		// 通常はこのエクセプションの発生は考えにくい

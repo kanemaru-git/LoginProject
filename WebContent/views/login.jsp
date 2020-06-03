@@ -22,6 +22,6 @@
       <input type="submit" value="ログイン" />
 	</form>
 	<p class="emsg">${loginBean.emsg}</p>
-	
+	<p>アカウントをお持ちでない方はこちら<a href="/LoginProject/views/register.jsp">新規会員登録</a></p>
 </body>
 </html>

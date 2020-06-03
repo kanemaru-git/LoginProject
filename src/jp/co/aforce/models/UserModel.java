@@ -20,20 +20,20 @@ public class UserModel {
             DBUtil.makeStatement();
             
             //テーブル一行目をuserListに格納
-            String SQL1 = "SELECT user_id,username,password,gender FROM `users` where user_id = 1";
-            rs = DBUtil.execute(SQL1);
-            UserBean userBean1 = new UserBean();
-      	  userBean1.setUser_id(rs.getString("user_id"));
-      	  userBean1.setUsername(rs.getString("username"));
-      	  userBean1.setPassword(rs.getString("password"));
-      	  userBean1.setGender(rs.getString("gender"));
-      	  usersList.add(userBean1);
-            
+//            String SQL1 = "SELECT user_id,username,password,gender FROM `users` where user_id = 1";
+//            rs = DBUtil.execute(SQL1);
+//            UserBean userBean1 = new UserBean();
+//      	  userBean1.setUser_id(rs.getString("user_id"));
+//      	  userBean1.setUsername(rs.getString("username"));
+//      	  userBean1.setPassword(rs.getString("password"));
+//      	  userBean1.setGender(rs.getString("gender"));
+//      	  usersList.add(userBean1);
+//            
             
             // SQLを実行
             String SQL = "SELECT user_id,username,password,gender FROM `users`";
             rs = DBUtil.execute(SQL);
-            
+            rs.beforeFirst();
             //テーブル2行目から最後までuserListに格納
               while(rs.next()) {
             	  UserBean userBean = new UserBean();
